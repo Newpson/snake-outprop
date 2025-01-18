@@ -1,0 +1,25 @@
+TOOLCHAIN ?= /home/newpson/downloads/cc65/bin
+CC = $(TOOLCHAIN)/cl65
+CS = $(TOOLCHAIN)/cc65
+AS = $(TOOLCHAIN)/ca65
+LD = $(TOOLCHAIN)/ld65
+EM ?= x64
+
+CFLAGS = -O -t c64
+
+PROGNAME = snake-c64
+
+all: $(PROGNAME)
+
+run:
+	$(EM) $(PROGNAME)
+
+$(PROGNAME): $(PROGNAME).c
+	$(CC) $(CFLAGS) $^
+
+$(PROGNAME).s: $(PROGNAME).c
+	$(CS) $(CFLAGS) $^
+
+.PHONY: all clean
+clean:
+	rm -f $(PROGNAME)
